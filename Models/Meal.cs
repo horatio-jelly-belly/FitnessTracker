@@ -15,6 +15,17 @@ namespace FitnessTracker.Models
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the foreign key reference to the User entity.
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the User that owns this meal.
+        /// Navigation property for Entity Framework.
+        /// </summary>
+        public User? User { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the meal. Cannot be null or empty.
         /// </summary>
         public string MealName 
@@ -37,7 +48,7 @@ namespace FitnessTracker.Models
         /// <summary>
         /// Gets or sets the collection of food items in this meal.
         /// </summary>
-        public List<FoodItem> FoodItems { get; set; } = new(); 
+        public List<FoodItem> FoodItems { get; set; } = []; 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Meal"/> class.
@@ -58,7 +69,7 @@ namespace FitnessTracker.Models
 
             MealName = name;
             MealDate = date;
-            FoodItems = items ?? new List<FoodItem>();
+            FoodItems = items ?? [];
         }
 
         /// <summary>
@@ -136,7 +147,7 @@ namespace FitnessTracker.Models
             summary.AppendLine("Food Items:");
             foreach (var item in FoodItems.Where(fi => fi != null))
             {
-                    summary.AppendLine($"- {item.Name}: {item.Calories} kcal, {item.Protein}g protein, {item.Carbohydrates}g carbs, {item.Fats}g fats");
+                    summary.AppendLine($"- {item.Food?.FoodName ?? "Unknown"}: {item.Calories} kcal, {item.Protein}g protein, {item.Carbohydrates}g carbs, {item.Fats}g fats");
             }
             summary.AppendLine($"Total Calories: {CalculateTotalCalories()} kcal");
             summary.AppendLine($"Total Protein: {CalculateTotalProtein()} g");

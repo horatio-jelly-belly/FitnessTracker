@@ -18,6 +18,17 @@ namespace FitnessTracker.Models
         public int FoodId { get; set; }
 
         /// <summary>
+        /// Gets or sets the foreign key reference to the Meal entity.
+        /// </summary>
+        public int MealId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Meal entity that this food item is associated with.
+        /// Navigation property for Entity Framework.
+        /// </summary>
+        public Meal? Meal { get; set; }
+
+        /// <summary>
         /// Gets or sets the Food entity that this food item is based on.
         /// Navigation property for Entity Framework.
         /// </summary>

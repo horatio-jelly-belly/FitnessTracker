@@ -28,7 +28,7 @@
     /// <summary>
     /// Represents a user's fitness profile with personal information, goals, and health metrics.
     /// </summary>
-    public class UserProfile
+    public class User
     {
         /// <summary>
         /// Gets or sets the unique identifier for the user profile.
@@ -55,6 +55,16 @@
         /// Gets or sets the collection of weight entries for tracking weight history.
         /// </summary>
         public List<WeightEntry> WeightEntries { get; set; } = [];
+
+        /// <summary>
+        /// Gets or sets the collection of body measurements for tracking physical progress.
+        /// </summary>
+        public List<BodyMeasurement> BodyMeasurements { get; set; } = [];
+
+        /// <summary>
+        /// Gets or sets the collection of workout sessions for tracking exercise history.
+        /// </summary>
+        public List<WorkoutSession> WorkoutSessions { get; set; } = [];
 
         /// <summary>
         /// Gets the most recent weight entry, or null if no entries exist.
@@ -93,7 +103,12 @@
         public double? CurrentBMI => CurrentWeight.HasValue ? CalculateBMI(CurrentWeight.Value) : null;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserProfile"/> class.
+        /// Gets or sets the collection of meals associated with this user profile.
+        /// </summary>
+        public List<Meal> Meals { get; set; } = [];
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="User"/> class.
         /// </summary>
         /// <param name="heightFeet">Height in feet (must be greater than 0).</param>
         /// <param name="heightInches">Height in inches (must be 0-11).</param>
@@ -106,7 +121,7 @@
         /// <exception cref="ArgumentException">
         /// Thrown when gender is not "Male" or "Female".
         /// </exception>
-        public UserProfile(int heightFeet, int heightInches, DateTime dateofBirth, FitnessGoal goal, string gender)
+        public User(int heightFeet, int heightInches, DateTime dateofBirth, FitnessGoal goal, string gender)
         {
             // Validate date, heightFeet, heightInches, and gender here because they are init-only
             if (dateofBirth >= DateTime.Today)
@@ -132,7 +147,7 @@
         /// <summary>
         /// Parameterless constructor for Entity Framework Core.
         /// </summary>
-        private UserProfile() { } 
+        private User() { } 
 
         /// <summary>
         /// Calculates the user's age based on date of birth.

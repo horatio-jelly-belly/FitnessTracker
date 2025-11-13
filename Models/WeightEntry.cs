@@ -14,6 +14,17 @@
         public int Id { get; set; }
 
         /// <summary>
+        /// Gets or sets the foreign key reference to the User entity.
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the User that owns this weight entry.
+        /// Navigation property for Entity Framework.
+        /// </summary>
+        public User? User { get; set; }
+
+        /// <summary>
         /// Gets the date when this weight measurement was recorded.
         /// Cannot be in the future.
         /// </summary>
