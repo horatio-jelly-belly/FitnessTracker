@@ -20,6 +20,7 @@ namespace FitnessTracker.ViewModels
             field = value;
             OnPropertyChanged(propertyName);
             return true;
+
         }
     }
 }
