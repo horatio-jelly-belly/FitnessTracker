@@ -16,6 +16,10 @@ namespace FitnessTracker.Data
         public DbSet<Food> Foods { get; set; }
         public DbSet<ExerciseCategory> ExerciseCategories { get; set; }
 
+        public FitnessTrackerContext() : base()
+        {
+        }
+
         public FitnessTrackerContext(DbContextOptions<FitnessTrackerContext> options)
             : base(options)
         {
