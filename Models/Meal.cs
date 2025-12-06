@@ -62,7 +62,7 @@ namespace FitnessTracker.Models
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when date is in the future.
         /// </exception>
-        public Meal(string name, DateTime date, List<FoodItem> items = null) 
+        public Meal(string name, DateTime date, List<FoodItem>? items = null) 
         { 
             if (date > DateTime.Today)
                 throw new ArgumentOutOfRangeException(nameof(date), "Meal date cannot be in the future.");

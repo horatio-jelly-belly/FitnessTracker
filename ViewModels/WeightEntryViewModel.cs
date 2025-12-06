@@ -92,26 +92,13 @@ namespace FitnessTracker.ViewModels
         /// <param name="parameter">Command parameter (not used).</param>
         private void ExecuteSave(object? parameter)
         {
-            try
-            {
-                WeightEntry newEntry = new WeightEntry(EntryDate, Weight, BodyFatPercentage);
-                _currentUser.WeightEntries.Add(newEntry);
-                _context.SaveChanges();
+            WeightEntry newEntry = new WeightEntry(EntryDate, Weight, BodyFatPercentage);
+            _currentUser.WeightEntries.Add(newEntry);
+            _context.SaveChanges();
 
-                // Reset form after successful save
-                Weight = 0;
-                BodyFatPercentage = 0;
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                // Handle validation errors from WeightEntry constructor
-                // TODO: Show error message to user
-            }
-            catch (DbUpdateException ex)
-            {
-                // Handle database save errors
-                // TODO: Show "Could not save to database" message
-            }
+            // Reset form after successful save
+            Weight = 0;
+            BodyFatPercentage = 0;
         }
 
         /// <summary>

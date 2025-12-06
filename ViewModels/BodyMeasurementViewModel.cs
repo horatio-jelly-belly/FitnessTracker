@@ -70,23 +70,10 @@ namespace FitnessTracker.ViewModels
         /// <param name="parameter">Command parameter (not used).</param>
         private void ExecuteSave(object? parameter)
         {
-            try
-            {
-                var measurement = new BodyMeasurement(MeasurementDate, WaistSize, HipSize, ChestSize, ArmSize, ThighSize);
-                _currentUser.BodyMeasurements.Add(measurement);
-                _context.SaveChanges();
-                ExecuteClear(null);
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                // Handle validation errors from BodyMeasurement constructor
-                // TODO: Show error message to user
-            }
-            catch (DbUpdateException ex)
-            {
-                // Handle database save errors
-                // TODO: Show "Could not save to database" message
-            }
+            var measurement = new BodyMeasurement(MeasurementDate, WaistSize, HipSize, ChestSize, ArmSize, ThighSize);
+            _currentUser.BodyMeasurements.Add(measurement);
+            _context.SaveChanges();
+            ExecuteClear(null);
         }
 
         /// <summary>
