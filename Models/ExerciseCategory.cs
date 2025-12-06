@@ -3,7 +3,7 @@
 namespace FitnessTracker.Models
 {
     /// <summary>
-    /// Represents a category for classifying exercises (e.g., Strength, Cardio, Flexibility).
+    /// Represents a category for classifying exercises (e.g., chest, legs, arms).
     /// </summary>
     public class ExerciseCategory
     {
@@ -21,6 +21,11 @@ namespace FitnessTracker.Models
         /// Gets or sets a description of the exercise category.
         /// </summary>
         public string Description { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Gets or sets the collection of exercise templates belonging to this category.
+        /// </summary>
+        public List<ExerciseTemplate> ExerciseTemplates { get; set; } = [];
 
         /// <summary>
         /// Gets or sets the collection of exercises belonging to this category.

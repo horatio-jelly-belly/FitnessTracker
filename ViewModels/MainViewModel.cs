@@ -24,6 +24,8 @@ namespace FitnessTracker.ViewModels
             // Child ViewModels
             WeightEntryVM = new WeightEntryViewModel(_context, _currentUser);
             BodyMeasurementVM = new BodyMeasurementViewModel(_context, _currentUser);
+            MealVM = new MealViewModel(_context, _currentUser); 
+            WorkoutSessionVM = new WorkoutSessionViewModel(_context, _currentUser);
         }
 
         /// <summary>
@@ -35,6 +37,17 @@ namespace FitnessTracker.ViewModels
         /// Gets the view model for body measurement functionality.
         /// </summary>
         public BodyMeasurementViewModel BodyMeasurementVM { get; }
+
+        /// <summary>
+        /// Gets the view model for meal functionality.
+        /// </summary>
+        public MealViewModel MealVM { get; }
+
+        /// <summary>
+        /// Gets the view model for workout session functionality.
+        /// </summary>
+        public WorkoutSessionViewModel WorkoutSessionVM { get; }
+
 
         /// <summary>
         /// Creates a default user for testing purposes when no users exist in the database.

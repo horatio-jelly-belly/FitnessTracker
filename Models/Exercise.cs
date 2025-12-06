@@ -36,7 +36,7 @@ namespace FitnessTracker.Models
         public int ExerciseCategoryId { get; set; }
 
         /// <summary>
-        /// Gets or sets the category of this exercise (e.g., strength, cardio).
+        /// Gets or sets the category of this exercise (e.g., chest, legs, arms).
         /// </summary>
         public ExerciseCategory ExerciseCategory { get; set; } = null!;
 

@@ -19,7 +19,7 @@ namespace FitnessTracker.ViewModels
         private List<Food> _foodList = [];
         private string _mealName = string.Empty;
         private DateTime _mealDate;
-        private ObservableCollection<FoodItem> _foodItems = [];
+        private ObservableCollection<FoodItem> _foodItems = new();
 
         /// <summary>
         /// Gets the command for saving the meal to the database.
