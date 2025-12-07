@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessTracker"
+        xmlns:viewmodels="clr-namespace:FitnessTracker.ViewModels"
+        xmlns:views="clr-namespace:FitnessTracker.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fitness Tracker" Height="600" Width="900">
+    
+    <Window.DataContext>
+        <viewmodels:MainViewModel />
+    </Window.DataContext>
+    
     <Grid>
-
+        <TabControl>
+            <TabItem Header="Weight">
+                <views:WeightEntryView DataContext="{Binding WeightEntryVM}" />
+            </TabItem>
+            <TabItem Header="Measurements">
+                <views:BodyMeasurementView DataContext="{Binding BodyMeasurementVM}" />
+            </TabItem>
+            <TabItem Header="Meals">
+                <views:MealView DataContext="{Binding MealVM}" />
+            </TabItem>
+            <TabItem Header="Workouts">
+                <views:WorkoutSessionView DataContext="{Binding WorkoutSessionVM}" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
