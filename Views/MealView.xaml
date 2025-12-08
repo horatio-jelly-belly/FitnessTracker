@@ -1,12 +1,97 @@
 <UserControl x:Class="FitnessTracker.Views.MealView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FitnessTracker.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Meal View" HorizontalAlignment="Center" VerticalAlignment="Center" />
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="800">
+
+  <Grid Margin="20">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="300"/>
+      <ColumnDefinition Width="20"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- Left side: Meal info and food selection -->
+    <StackPanel Grid.Column="0">
+      <TextBlock Text="Log Meal" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+      <!-- Meal Name -->
+      <TextBlock Text="Meal Name:" Margin="0,0,0,5"/>
+      <TextBox Text="{Binding MealName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15"/>
+
+      <!-- Meal Date -->
+      <TextBlock Text="Date:" Margin="0,0,0,5"/>
+      <DatePicker SelectedDate="{Binding MealDate}" Margin="0,0,0,20"/>
+
+      <!-- Separator -->
+      <Separator Margin="0,0,0,20"/>
+
+      <!-- Food Selection -->
+      <TextBlock Text="Add Food Item" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,15"/>
+
+      <TextBlock Text="Select Food:" Margin="0,0,0,5"/>
+      <ComboBox ItemsSource="{Binding FoodList}"
+                SelectedItem="{Binding SelectedFood}"
+                DisplayMemberPath="FoodName"
+                Margin="0,0,0,15"/>
+
+      <TextBlock Text="Servings:" Margin="0,0,0,5"/>
+      <TextBox Text="{Binding ServingsConsumed, UpdateSourceTrigger=PropertyChanged, TargetNullValue='', StringFormat=N2}" Margin="0,0,0,15"/>
+
+      <Button Content="Add to Meal"
+              Command="{Binding AddFoodItemCommand}"
+              Width="120"
+              HorizontalAlignment="Left"
+              Padding="10,5"
+              Margin="0,0,0,20"/>
+
+      <!-- Separator -->
+      <Separator Margin="0,0,0,20"/>
+
+      <!-- Save/Clear Buttons -->
+      <StackPanel Orientation="Horizontal">
+        <Button Content="Save Meal" Command="{Binding SaveCommand}" Width="100" Margin="0,0,10,0" Padding="10,5"/>
+        <Button Content="Clear" Command="{Binding ClearCommand}" Width="80" Padding="10,5"/>
+      </StackPanel>
+    </StackPanel>
+
+    <!-- Right side: Food items list -->
+    <Grid Grid.Column="2">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <TextBlock Text="Food Items in Meal" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+      <!-- List of added food items -->
+      <ListView Grid.Row="1"
+                ItemsSource="{Binding FoodItems}"
+                BorderBrush="LightGray"
+                BorderThickness="1">
+        <ListView.View>
+          <GridView>
+            <GridViewColumn Header="Food" Width="150" DisplayMemberBinding="{Binding Food.FoodName}"/>
+            <GridViewColumn Header="Servings" Width="70" DisplayMemberBinding="{Binding ServingsConsumed}"/>
+            <GridViewColumn Header="Calories" Width="70" DisplayMemberBinding="{Binding Calories, StringFormat=N0}"/>
+            <GridViewColumn Header="Protein" Width="70" DisplayMemberBinding="{Binding Protein, StringFormat=N1}"/>
+            <GridViewColumn Header="Carbs" Width="70" DisplayMemberBinding="{Binding Carbohydrates, StringFormat=N1}"/>
+            <GridViewColumn Header="Fats" Width="60" DisplayMemberBinding="{Binding Fats, StringFormat=N1}"/>
+            <GridViewColumn Header="" Width="70">
+              <GridViewColumn.CellTemplate>
+                <DataTemplate>
+                  <Button Content="Remove"
+                          Command="{Binding DataContext.RemoveFoodItemCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                          CommandParameter="{Binding}"
+                          Padding="5,2"/>
+                </DataTemplate>
+              </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+          </GridView>
+        </ListView.View>
+      </ListView>
     </Grid>
+  </Grid>
 </UserControl>

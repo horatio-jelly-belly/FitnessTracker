@@ -15,9 +15,9 @@ namespace FitnessTracker.ViewModels
         private readonly FitnessTrackerContext _context;
         private readonly User _currentUser;
         private DateTime _sessionDate;
-        private int _setNumber;
-        private int _repetitions;
-        private double _weight;
+        private int? _setNumber;
+        private int? _repetitions;
+        private double? _weight;
         private ExerciseTemplate? _selectedTemplate;        
         private ExerciseCategory? _selectedCategory;
         private ObservableCollection<ExerciseTemplate> _exerciseTemplateList = [];
@@ -150,9 +150,9 @@ namespace FitnessTracker.ViewModels
         private bool CanAddSet(object? parameter)
         {
             return SelectedTemplate != null &&
-                   SetNumber > 0 &&
-                   Weight > 0 &&
-                   Repetitions > 0;
+                   SetNumber.HasValue && SetNumber > 0 &&
+                   Weight.HasValue && Weight > 0 &&
+                   Repetitions.HasValue && Repetitions > 0;
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace FitnessTracker.ViewModels
         /// <param name="parameter">Command parameter (not used).</param>
         private void AddSet(object? parameter)
         {
-            var newSet = new Set(SetNumber, Weight, Repetitions);
+            var newSet = new Set(SetNumber!.Value, Weight!.Value, Repetitions!.Value);
             Sets.Add(newSet);
             SetNumber++;
         }
@@ -172,7 +172,7 @@ namespace FitnessTracker.ViewModels
         /// Gets or sets the current set number for the exercise being created.
         /// Must be greater than 0 to enable adding a set.
         /// </summary>
-        public int SetNumber
+        public int? SetNumber
         {
             get => _setNumber;
             set => SetProperty(ref _setNumber, value);
@@ -182,7 +182,7 @@ namespace FitnessTracker.ViewModels
         /// Gets or sets the number of repetitions for the current set.
         /// Must be greater than 0 to enable adding a set.
         /// </summary>
-        public int Repetitions
+        public int? Repetitions
         {
             get => _repetitions;
             set => SetProperty(ref _repetitions, value);
@@ -192,7 +192,7 @@ namespace FitnessTracker.ViewModels
         /// Gets or sets the weight used for the current set in pounds.
         /// Must be greater than 0 to enable adding a set.
         /// </summary>
-        public double Weight
+        public double? Weight
         {
             get => _weight;
             set => SetProperty(ref _weight, value);
@@ -286,9 +286,9 @@ namespace FitnessTracker.ViewModels
             SessionDate = DateTime.Today;
             SelectedCategory = null;
             SelectedTemplate = null;
-            Repetitions = 0;
-            Weight = 0;
-            SetNumber = 0;
+            Repetitions = null;
+            Weight = null;
+            SetNumber = null;
             Sets.Clear();
         }
     }

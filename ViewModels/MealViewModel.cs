@@ -15,7 +15,7 @@ namespace FitnessTracker.ViewModels
         private readonly FitnessTrackerContext _context;
         private readonly User _currentUser;
         private Food? _selectedFood;
-        private double _servingsConsumed;
+        private double? _servingsConsumed;
         private List<Food> _foodList = [];
         private string _mealName = string.Empty;
         private DateTime _mealDate;
@@ -65,7 +65,7 @@ namespace FitnessTracker.ViewModels
         /// Gets or sets the number of servings consumed for the selected food.
         /// Must be greater than 0 to enable adding a food item.
         /// </summary>
-        public double ServingsConsumed
+        public double? ServingsConsumed
         {
             get => _servingsConsumed;
             set => SetProperty(ref _servingsConsumed, value);
@@ -148,7 +148,7 @@ namespace FitnessTracker.ViewModels
         /// <returns>True if a food is selected and servings consumed is greater than 0; otherwise, false.</returns>
         private bool CanExecuteAddFoodItem(object? parameter)
         {
-            return SelectedFood != null && ServingsConsumed > 0;
+            return SelectedFood != null && ServingsConsumed.HasValue && ServingsConsumed > 0;
         }
 
         /// <summary>
@@ -159,11 +159,11 @@ namespace FitnessTracker.ViewModels
         /// <param name="parameter">Command parameter (not used).</param>
         private void ExecuteAddFoodItem(object? parameter)
         {
-            FoodItem foodItem = new FoodItem(SelectedFood!, ServingsConsumed);
+            FoodItem foodItem = new FoodItem(SelectedFood!, ServingsConsumed!.Value);
             FoodItems.Add(foodItem);
 
             SelectedFood = null;
-            ServingsConsumed = 0;
+            ServingsConsumed = null;
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace FitnessTracker.ViewModels
             MealName = string.Empty;
             MealDate = DateTime.Today;
             FoodItems.Clear();
-            ServingsConsumed = 0;
+            ServingsConsumed = null;
             SelectedFood = null;
         }
 

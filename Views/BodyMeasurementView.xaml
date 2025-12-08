@@ -3,10 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FitnessTracker.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Body Measurement View" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    <Grid Margin="20">
+        <StackPanel Width="300" HorizontalAlignment="Left">
+            <TextBlock Text="Log Body Measurements" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+            <!-- Measurement Date -->
+            <TextBlock Text="Date:" Margin="0,0,0,5"/>
+            <DatePicker SelectedDate="{Binding MeasurementDate}" Margin="0,0,0,15"/>
+
+            <!-- Waist -->
+            <TextBlock Text="Waist (inches):" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding WaistSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+            <!-- Chest -->
+            <TextBlock Text="Chest (inches):" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding ChestSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+            <!-- Arms -->
+            <TextBlock Text="Arms (inches):" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding ArmSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+            <!-- Thighs -->
+            <TextBlock Text="Thighs (inches):" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding ThighSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,10"/>
+
+            <!-- Hips -->
+            <TextBlock Text="Hips (inches):" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding HipSize, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20"/>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Save" Command="{Binding SaveCommand}" Width="80" Margin="0,0,10,0" Padding="10,5"/>
+                <Button Content="Clear" Command="{Binding ClearCommand}" Width="80" Padding="10,5"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>
